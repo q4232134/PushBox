@@ -1,20 +1,18 @@
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Map {
     // 0:空位
-    // 1：正确位置
+    // 1：目标位置
     // 2：箱子位置
     // 8:墙壁位置
     // 4:站立位置
-    
     // 3：摆放正确
     // 可行动:0,1,4,5
     // 可站里:4,5
     
-    public static int H = 8;
-    public static int W = 8;
+    public static int H = 10;
+    public static int W = 10;
     private static final int NUM = H * W;
     public static int TARGET = 0;
     private int finished = -1;

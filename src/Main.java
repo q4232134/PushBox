@@ -2,26 +2,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream.GetField;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
 public class Main {
     static HashMap<Integer, Map> list = new HashMap<Integer, Map>();
     static Stack<Map> stack = new Stack<Map>();
     static HashSet<Map> set = new HashSet<Map>();
-    
+
     public static void main(String args[]) {
         long start = System.currentTimeMillis();
-        Map.W = 8;
-        Map.H = 7;
-        Map m1 = readTxtFile("C:\\Users\\Administrator\\Desktop\\1.txt");
+        Map.W = 10;
+        Map.H = 10;
+        Map m1 = readTxtFile("C:\\Users\\教主\\Desktop\\1.txt");
         m1.setTarget();
         m1.findStart();
         LinkedList<Map> list = new LinkedList<Map>();
@@ -31,7 +27,8 @@ public class Main {
             map = list.pop();
             if (!set.add(map))
                 continue;
-            System.out.println(list.size() + "--" + set.size());
+//            System.out.println(list.size() + "--" + set.size());
+//            System.out.println(map);
             if (map.isDead())
                 continue;
             list.addAll(map.getChildMap());
@@ -45,15 +42,15 @@ public class Main {
         long end = System.currentTimeMillis();
         SimpleDateFormat format = new SimpleDateFormat("mm:ss:SSS");
         System.out.println(format.format(end - start));
-        
+
     }
-    
+
     static boolean putMap(Map map) {
         boolean flag = true;
         if (!list.containsKey(map.hashCode())) {
             list.put(map.hashCode(), map);
         } else {
-            for (int i = 0;; i++) {
+            for (int i = 0; ; i++) {
                 Map temp = list.get(map.hashCode() + i);
                 if (temp == null) {
                     list.put(map.hashCode() + i, map);
@@ -70,7 +67,7 @@ public class Main {
             System.out.println(map);
         return flag;
     }
-    
+
     /**
      * 读取文件数据生成新的Map
      *
@@ -87,7 +84,9 @@ public class Main {
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 int i = 0, j = 0;
-                while ((lineTxt = bufferedReader.readLine()) != null) {
+                while (true) {
+                    lineTxt = bufferedReader.readLine();
+                    if (lineTxt == null) break;
                     char[] temp = lineTxt.toCharArray();
                     j = 0;
                     for (char temp2 : temp) {
